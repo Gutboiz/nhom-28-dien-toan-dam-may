@@ -1,0 +1,5 @@
+{
+  "service": "nhom-28",
+  "replicas": 2,
+  "log_level": "info"
+}

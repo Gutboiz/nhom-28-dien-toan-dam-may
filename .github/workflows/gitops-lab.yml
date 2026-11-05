@@ -1,0 +1,27 @@
+name: GitOps lab
+on:
+  push:
+    paths:
+      - 'gitops-lab/**'
+      - '.github/workflows/gitops-lab.yml'
+  pull_request:
+    paths:
+      - 'gitops-lab/**'
+      - '.github/workflows/gitops-lab.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: '1.9.8'
+          terraform_wrapper: false
+      - run: terraform -chdir=gitops-lab/infra fmt -check
+      - run: bash gitops-lab/scripts/demo.sh
