@@ -16,6 +16,6 @@ resource "local_file" "web_infra" {
         ports:
           - "8080:80"
         deploy:
-          replicas: 3
+          replicas: 5
   EOT
 }
